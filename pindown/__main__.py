@@ -1,4 +1,5 @@
-from core import pindown
+
+from main import main
 
 if __name__ == "__main__":
-    pindown()
+    main()
