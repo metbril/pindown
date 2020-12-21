@@ -65,8 +65,8 @@ def write_file(bookmark, output_path):
     output_path = os.path.expanduser(output_path)
     output_path = f"{output_path}/{year}"
     sanitized = sanitize_filename(bookmark["description"])
-    if len(sanitized) >= 250:
-        sanitized = sanitized[:250]
+    if len(f"{sanitized}.{FILE_EXTENSION}") > 255:
+        sanitized = sanitized[:254-len(FILE_EXTENSION)]
     output_file = f"{output_path}/{sanitized}.{FILE_EXTENSION}"
 
     create_path(output_path)
