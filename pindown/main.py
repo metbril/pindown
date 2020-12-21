@@ -25,7 +25,6 @@ VALID_FILENAME_CHARS = "-_.() %s%s" % (string.ascii_letters, string.digits)
 FILE_EXTENSION = "md"
 
 def get_bookmarks(input_filename):
-
     with open(input_filename, "r") as input_filename:
         return json.load(input_filename)
 
@@ -44,7 +43,6 @@ def prepend_tags(tags, prepend):
 def format_bookmark(bookmark):
     trans = "".maketrans('','','[]()')
     time = parse(bookmark["time"])
-
     return(f"[{bookmark['description'].translate(trans).strip()}]"
            f"({bookmark['href'].translate(trans)})\n"
            f"{bookmark['extended']}\n\n"
@@ -75,23 +73,18 @@ def write_file(bookmark, output_path):
         output_file.write(formatted)
 
 def main():
-
     parser = argparse.ArgumentParser(description='Convert pinboard bookmarks to markdown.')
     parser.add_argument('-i', '--input-file', type=argparse.FileType('r'), required=True, help='input file')
     parser.add_argument('-p', '--output-path', default='./pinboard', help='output path')
     parser.add_argument('--extra-tags', default='', help='space separated list of extra tags')
     parser.add_argument('--prepend-tags', default='', help='character to prepend each tag with')
-
     global args
     args = parser.parse_args()
 
     bookmarks = get_bookmarks( args.input_file.name )
-
     if len(bookmarks) == 0:
         print("No bookmarks in file {args.input_file.name}")
         return
-
     for bookmark in bookmarks:
-
         bookmark['tags'] = add_tag(bookmark['tags'], args.extra_tags)
         write_file(bookmark, args.output_path)
