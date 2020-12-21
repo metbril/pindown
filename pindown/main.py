@@ -22,6 +22,7 @@ import string
 from dateutil.parser import parse
 
 VALID_FILENAME_CHARS = "-_.() %s%s" % (string.ascii_letters, string.digits)
+FILE_EXTENSION = "md"
 
 def get_bookmarks(input_filename):
 
@@ -66,7 +67,7 @@ def write_file(bookmark, output_path):
     sanitized = sanitize_filename(bookmark["description"])
     if len(sanitized) >= 250:
         sanitized = sanitized[:250]
-    output_file = f"{output_path}/{sanitized}.md"
+    output_file = f"{output_path}/{sanitized}.{FILE_EXTENSION}"
 
     create_path(output_path)
     with open(output_file, "w") as output_file:
