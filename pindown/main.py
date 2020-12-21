@@ -94,6 +94,3 @@ def main():
 
         bookmark['tags'] = add_tag(bookmark['tags'], args.extra_tags)
         write_file(bookmark, args.output_path)
-
-if __name__ == "__main__":
-    main()
