@@ -43,10 +43,10 @@ def prepend_tags(tags, prepend):
 def format_bookmark(bookmark):
     trans = "".maketrans('','','[]()')
     time = parse(bookmark["time"])
-    return(f"{bookmark['description'].translate(trans).strip()}  \n"
-           f"{bookmark['href'].translate(trans)}  \n"
-           f"{time.date()}  \n"
-           f"{prepend_tags(bookmark['tags'], args.prepend_tags)}  \n\n"
+    return(f"{bookmark['description'].translate(trans).strip()}\n\n"
+           f"{bookmark['href'].translate(trans)}\n\n"
+           f"{time.date()}\n\n"
+           f"{prepend_tags(bookmark['tags'], args.prepend_tags)}\n\n"
            f"{bookmark['extended']}")
 
 def create_path(output_path):
