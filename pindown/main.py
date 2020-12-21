@@ -22,7 +22,7 @@ import string
 from dateutil.parser import parse
 
 VALID_FILENAME_CHARS = "-_.() %s%s" % (string.ascii_letters, string.digits)
-FILE_EXTENSION = "txt"
+FILE_EXTENSION = "md"
 
 def get_bookmarks(input_filename):
     with open(input_filename, "r") as input_filename:
