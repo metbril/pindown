@@ -59,13 +59,12 @@ def sanitize_filename(text):
     return "".join(c for c in text if c in VALID_FILENAME_CHARS).strip().strip('.')
 
 def write_file(bookmark, output_path):
-    year = parse(bookmark["time"]).year
+    date = parse(bookmark["time"]).strftime("%Y-%m-%d")
     output_path = os.path.expanduser(output_path)
-    output_path = f"{output_path}/{year}"
     sanitized = sanitize_filename(bookmark["description"])
-    if len(f"{sanitized}.{FILE_EXTENSION}") > 255:
-        sanitized = sanitized[:254-len(FILE_EXTENSION)]
-    output_file = f"{output_path}/{sanitized}.{FILE_EXTENSION}"
+    if len(f"{date} {sanitized}.{FILE_EXTENSION}") > 255:
+        sanitized = sanitized[:255-len(FILE_EXTENSION)-len(""+date)-2]
+    output_file = f"{output_path}/{date} {sanitized}.{FILE_EXTENSION}"
 
     create_path(output_path)
     with open(output_file, "w") as output_file:
